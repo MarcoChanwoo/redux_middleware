@@ -23,7 +23,7 @@ const initialState = 0; // 상태는 반드시 객체일 필요가 없으며 숫
 const counter = handleActions(
   {
     [INCREASE]: (state) => state + 1,
-    [DECREASE]: (state) => state + 1,
+    [DECREASE]: (state) => state - 1,
   },
   initialState
 );

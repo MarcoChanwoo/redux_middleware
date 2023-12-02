@@ -61,53 +61,84 @@ const initialState = {
   users: null,
 };
 
-const sample = handleActions(
-  {
-    [GET_POST]: (state) => ({
-      ...state,
-      loading: {
-        ...state.loading,
-        GET_POST: true, // 요청 시작
-      },
-    }),
-    [GET_POST_SUCCESS]: (state, action) => ({
-      ...state,
-      loading: {
-        ...state.loading,
-        GET_POST: false, // 요청 완료
-      },
-    }),
-    [GET_POST_FAILURE]: (state, action) => ({
-      ...state,
-      loading: {
-        ...state.loading,
-        GET_POST: false, // 요청 완료
-      },
-    }),
-    [GET_USERS]: (state) => ({
-      ...state,
-      loading: {
-        ...state.loading,
-        GET_USERS: true, // 요청 시작
-      },
-    }),
-    [GET_USERS_SUCCESS]: (state, action) => ({
-      ...state,
-      loading: {
-        ...state.loading,
-        GET_USERS: false, // 요청 완료
-      },
-      users: action.payload,
-    }),
-    [GET_USERS_FAILURE]: (state, action) => ({
-      ...state,
-      loading: {
-        ...state.loading,
-        GET_USERS: false, // 요청 완료
-      },
-    }),
-  },
-  initialState
-);
+// const sample = handleActions(
+//   {
+//     [GET_POST]: (state) => ({
+//       ...state,
+//       loading: {
+//         ...state.loading,
+//         GET_POST: true, // 요청 시작
+//       },
+//     }),
+//     [GET_POST_SUCCESS]: (state, action) => ({
+//       ...state,
+//       loading: {
+//         ...state.loading,
+//         GET_POST: false, // 요청 완료
+//       },
+//     }),
+//     [GET_POST_FAILURE]: (state, action) => ({
+//       ...state,
+//       loading: {
+//         ...state.loading,
+//         GET_POST: false, // 요청 완료
+//       },
+//     }),
+//     [GET_USERS]: (state) => ({
+//       ...state,
+//       loading: {
+//         ...state.loading,
+//         GET_USERS: true, // 요청 시작
+//       },
+//     }),
+//     [GET_USERS_SUCCESS]: (state, action) => ({
+//       ...state,
+//       loading: {
+//         ...state.loading,
+//         GET_USERS: false, // 요청 완료
+//       },
+//       users: action.payload,
+//     }),
+//     [GET_USERS_FAILURE]: (state, action) => ({
+//       ...state,
+//       loading: {
+//         ...state.loading,
+//         GET_USERS: false, // 요청 완료
+//       },
+//     }),
+//   },
+//   initialState
+// );
+
+const sample = ({ loadingPost, loadingUsers, post, users }) => {
+  return (
+    <div>
+      <section>
+        <h1>포스트</h1>
+        {loadingPost && "로딩 중..."}
+        {!loadingPost && (
+          <div>
+            <h3>{post.title}</h3>
+            <h3>{post.body}</h3>
+          </div>
+        )}
+      </section>
+      <hr />
+      <section>
+        <h1>사용자 목록</h1>
+        {loadingUsers && "로딩 중..."}
+        {loadingUsers && users && (
+          <ul>
+            {users.map((user) => (
+              <li key={user.id}>
+                {user.username}({user.email})
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+    </div>
+  );
+};
 
 export default sample;

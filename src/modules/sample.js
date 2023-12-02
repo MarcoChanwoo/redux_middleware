@@ -47,3 +47,15 @@ export const getUsers = () => async (dispatch) => {
     throw e; // 추후 컴포넌트 단에서 에러를 조회할 수 있게 함
   }
 };
+
+// 초기 상태를 선언함
+// 요청의 로딩 중 상태는 loading이라는 객체에서 관리함
+
+const initialState = {
+  loading: {
+    GET_POST: false,
+    GET_USERS: false,
+  },
+  post: null,
+  users: null,
+};

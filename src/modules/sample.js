@@ -1,3 +1,4 @@
+import { handleActions } from "redux-actions";
 import * as api from "../lib/api";
 // 액션 타입 선언
 // 한 요청당 새 개를 만듦
@@ -59,3 +60,27 @@ const initialState = {
   post: null,
   users: null,
 };
+
+const sample = handleActions({
+  [GET_POST]: (state) => ({
+    ...state,
+    loading: {
+      ...state.loading,
+      GET_POST: true, // 요청 시작
+    },
+  }),
+  [GET_POST_SUCCESS]: (state, action) => ({
+    ...state,
+    loading: {
+      ...state.loading,
+      GET_POST: false, // 요청 완료
+    },
+  }),
+  [GET_POST_FAILURE]: (state, action) => ({
+    ...state,
+    loading: {
+      ...state.loading,
+      GET_POST: false, // 요청 완료
+    },
+  }),
+});

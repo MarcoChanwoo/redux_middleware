@@ -29,3 +29,21 @@ export const getPost = (id) => async (dispatch) => {
     throw e; // 나중에 컴포넌트 단에서 에러를 조회할 수 있게 해 줌
   }
 };
+
+export const getUsers = () => async (dispatch) => {
+  dispatch({ type: GET_USERS }); // 요청을 시작한 것을 알림
+  try {
+    const response = await api.getUsers();
+    dispatch({
+      type: GET_POST_SUCCESS,
+      payload: response.data,
+    }); // 요청 성공
+  } catch (e) {
+    dispatch({
+      type: GET_POST_FAILURE,
+      payload: e,
+      error: true,
+    }); // 에러 발생
+    throw e; // 추후 컴포넌트 단에서 에러를 조회할 수 있게 함
+  }
+};
